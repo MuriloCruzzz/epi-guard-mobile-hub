@@ -6,8 +6,8 @@ const Index = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Redirect to the splash screen
-    navigate('/');
+    // Redirect to the login screen
+    navigate('/login');
   }, [navigate]);
 
   return (

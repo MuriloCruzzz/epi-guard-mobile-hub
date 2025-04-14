@@ -40,43 +40,43 @@ const Login: React.FC = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-primary">
-      <div className="flex-1 flex flex-col items-center justify-center px-6 py-12">
-        <div className="flex flex-col items-center mb-10">
+      <div className="flex-1 flex flex-col items-center justify-between px-6 py-6">
+        <div className="w-full flex flex-col items-center mt-6">
           <img 
             src="/lovable-uploads/507a83d4-90b4-44a6-bd2f-50ae7bb88fb9.png" 
             alt="E-EPI Logo" 
-            className="w-64 mb-4"
+            className="w-56 mb-4"
           />
-          <h1 className="text-2xl font-bold text-white">Entre no E-epi</h1>
-          <p className="text-white text-center mt-2">Insira sua "chapa" para acessar</p>
+          <h1 className="text-xl font-bold text-white">Entre no E-epi</h1>
+          <p className="text-white text-center mt-2 text-sm">Insira sua "chapa" para acessar</p>
         </div>
 
         <div className="w-full max-w-md">
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label htmlFor="id" className="block text-white">ID Sistema Senior</label>
+              <label htmlFor="id" className="block text-white text-sm mb-1">ID Sistema Senior</label>
               <input
                 id="id"
                 type="text"
                 value={id}
                 onChange={(e) => setId(e.target.value)}
-                className="w-full px-4 py-3 rounded-md bg-white"
+                className="w-full px-4 py-3 rounded-md bg-white text-base"
                 placeholder="0123456789"
                 required
               />
             </div>
 
             <div>
-              <div className="flex justify-between">
-                <label htmlFor="password" className="block text-white">SENHA</label>
-                <a href="#" className="text-white hover:underline">Recuperar Senha</a>
+              <div className="flex justify-between items-center mb-1">
+                <label htmlFor="password" className="block text-white text-sm">SENHA</label>
+                <a href="#" className="text-white text-xs hover:underline">Recuperar Senha</a>
               </div>
               <input
                 id="password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 rounded-md bg-white"
+                className="w-full px-4 py-3 rounded-md bg-white text-base"
                 placeholder="Insira sua senha"
                 required
               />
@@ -84,34 +84,34 @@ const Login: React.FC = () => {
 
             <button
               type="submit"
-              className="w-full bg-white text-primary py-3 rounded-md font-bold"
+              className="w-full bg-white text-primary py-3 rounded-md font-bold text-base"
               disabled={isLoading}
             >
               {isLoading ? 'Entrando...' : 'Entrar'}
             </button>
 
             {error && (
-              <p className="text-red-300 text-center">{error}</p>
+              <p className="text-red-300 text-center text-sm">{error}</p>
             )}
           </form>
 
-          <div className="mt-8 text-center">
-            <p className="text-white">Não tem acesso? <a href="#" className="underline">Solicite aqui</a></p>
+          <div className="mt-4 text-center">
+            <p className="text-white text-sm">Não tem acesso? <a href="#" className="underline">Solicite aqui</a></p>
           </div>
+        </div>
 
-          <div className="mt-8 border-t border-white/30 pt-6">
-            <button
-              onClick={handleBiometricLogin}
-              className="w-full bg-white py-4 px-6 rounded-md flex items-center justify-center gap-3"
-              disabled={isLoading}
-            >
-              <Fingerprint size={28} className="text-primary" />
-              <div className="text-left">
-                <span className="text-primary font-bold">Login com Touch ID</span>
-                <p className="text-xs text-gray-500">Toque com o dedo no botão iniciar</p>
-              </div>
-            </button>
-          </div>
+        <div className="w-full max-w-md mt-6 border-t border-white/30 pt-6">
+          <button
+            onClick={handleBiometricLogin}
+            className="w-full bg-white py-3 px-4 rounded-md flex items-center justify-center gap-3"
+            disabled={isLoading}
+          >
+            <Fingerprint size={24} className="text-primary" />
+            <div className="text-left">
+              <span className="text-primary font-bold text-sm block">Login com Touch ID</span>
+              <p className="text-xs text-gray-500">Toque com o dedo no botão iniciar</p>
+            </div>
+          </button>
         </div>
       </div>
     </div>
