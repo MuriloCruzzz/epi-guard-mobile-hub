@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { useData } from '@/contexts/DataContext';
-import { HardHat, FileText, ChevronRight, Bell, Package } from 'lucide-react';
-import Header from '@/components/Header';
+import { HardHat, FileText, ChevronRight, Bell, Package, Menu } from 'lucide-react';
 import BottomNavigation from '@/components/BottomNavigation';
 import NotificationCard from '@/components/NotificationCard';
+import SideMenu from '@/components/SideMenu';
 
 interface LocationState {
   message?: string;
@@ -18,6 +18,7 @@ const Home: React.FC = () => {
   const { notifications, ddsList, requests, epis } = useData();
   const [showMessage, setShowMessage] = useState(false);
   const [message, setMessage] = useState('');
+  const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   
   useEffect(() => {
     const state = location.state as LocationState;
@@ -36,7 +37,28 @@ const Home: React.FC = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100 pb-16">
-      <Header title="" showNotification />
+      <div className="flex items-center justify-between bg-primary p-4 text-white w-full sticky top-0 z-10">
+        <button
+          onClick={() => setIsSideMenuOpen(true)}
+          className="text-white"
+        >
+          <Menu size={32} strokeWidth={2.5} />
+        </button>
+        
+        <button 
+          onClick={() => navigate('/notifications')}
+          className="relative"
+        >
+          <Bell size={24} />
+          {pendingNotifications.length > 0 && (
+            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+              {pendingNotifications.length}
+            </span>
+          )}
+        </button>
+      </div>
+      
+      <SideMenu isOpen={isSideMenuOpen} onClose={() => setIsSideMenuOpen(false)} />
       
       {showMessage && (
         <div className="bg-accent text-white p-4 text-center">
