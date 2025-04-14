@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
@@ -34,9 +33,11 @@ const Profile: React.FC = () => {
                 className="w-24 h-24 rounded-full border-4 border-white object-cover" 
               />
             ) : (
-              <div className="w-24 h-24 rounded-full bg-white flex items-center justify-center">
-                <UserIcon size={40} className="text-primary" />
-              </div>
+              <img 
+                src="/lovable-uploads/photo_user.png" 
+                alt={user?.name || 'Usuário'}
+                className="w-24 h-24 rounded-full border-4 border-white object-cover" 
+              />
             )}
           </div>
           

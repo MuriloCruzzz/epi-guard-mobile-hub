@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
@@ -51,9 +50,11 @@ const Home: React.FC = () => {
             {user?.profileImage ? (
               <img src={user.profileImage} alt={user.name} className="w-full h-full object-cover" />
             ) : (
-              <div className="bg-primary-light w-full h-full flex items-center justify-center">
-                <span className="text-xl font-bold">{user?.name.charAt(0)}</span>
-              </div>
+              <img 
+                src="/lovable-uploads/photo_user.png" 
+                alt={user?.name || 'Usuário'}
+                className="w-full h-full object-cover" 
+              />
             )}
           </div>
           <div>

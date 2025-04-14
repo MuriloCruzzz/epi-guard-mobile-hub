@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
@@ -43,7 +42,7 @@ const Login: React.FC = () => {
       <div className="flex-1 flex flex-col items-center justify-center px-6 py-12">
         <div className="flex flex-col items-center mb-10">
           <img 
-            src="/lovable-uploads/507a83d4-90b4-44a6-bd2f-50ae7bb88fb9.png" 
+            src="/lovable-uploads/logo_epi.png" 
             alt="E-EPI Logo" 
             className="w-64 mb-4"
           />
