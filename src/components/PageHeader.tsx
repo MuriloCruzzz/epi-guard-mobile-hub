@@ -25,7 +25,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({ title }) => {
                 >
                     <div className="text-right">
                         <p className="text-sm font-medium">{user?.name}</p>
-        
+
                     </div>
                     <div className="bg-white/20 rounded-full p-2">
                         {user?.profileImage ? (
