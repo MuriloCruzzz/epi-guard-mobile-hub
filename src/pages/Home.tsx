@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { useData } from '@/contexts/DataContext';
-import { HardHat, FileText, ChevronRight, Bell, Package, Menu } from 'lucide-react';
+import { HardHat, FileText, ChevronRight, Bell, Package, Menu, Users } from 'lucide-react';
 import BottomNavigation from '@/components/BottomNavigation';
 import NotificationCard from '@/components/NotificationCard';
 import SideMenu from '@/components/SideMenu';
@@ -19,7 +19,7 @@ const Home: React.FC = () => {
   const [showMessage, setShowMessage] = useState(false);
   const [message, setMessage] = useState('');
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
-  
+
   useEffect(() => {
     const state = location.state as LocationState;
     if (state?.message) {
@@ -44,8 +44,8 @@ const Home: React.FC = () => {
         >
           <Menu size={32} strokeWidth={2.5} />
         </button>
-        
-        <button 
+
+        <button
           onClick={() => navigate('/notifications')}
           className="relative"
         >
@@ -57,25 +57,25 @@ const Home: React.FC = () => {
           )}
         </button>
       </div>
-      
+
       <SideMenu isOpen={isSideMenuOpen} onClose={() => setIsSideMenuOpen(false)} />
-      
+
       {showMessage && (
         <div className="bg-accent text-white p-4 text-center">
           {message}
         </div>
       )}
-      
+
       <div className="p-4 bg-primary text-white">
         <div className="flex items-center gap-4">
           <div className="bg-white rounded-full w-12 h-12 overflow-hidden">
             {user?.profileImage ? (
               <img src={user.profileImage} alt={user.name} className="w-full h-full object-cover" />
             ) : (
-              <img 
-                src="/lovable-uploads/photo_user.png" 
+              <img
+                src="/lovable-uploads/photo_user.png"
                 alt={user?.name || 'Usuário'}
-                className="w-full h-full object-cover" 
+                className="w-full h-full object-cover"
               />
             )}
           </div>
@@ -84,7 +84,7 @@ const Home: React.FC = () => {
             <p className="text-sm">Segurança do trabalho, não basta falar tem que praticar!</p>
           </div>
         </div>
-        
+
         {latestRequest && (
           <div className="mt-6 bg-white rounded-lg p-4 text-black">
             <div className="flex justify-between">
@@ -124,11 +124,11 @@ const Home: React.FC = () => {
           </div>
         )}
       </div>
-      
+
       <div className="p-4">
         <h3 className="font-bold text-lg mb-4">Escolha uma opção</h3>
-        <div className="grid grid-cols-5 gap-2">
-          <button 
+        <div className="grid grid-cols-6 gap-2">
+          <button
             className="flex flex-col items-center justify-center p-2"
             onClick={() => navigate('/request-epi')}
           >
@@ -137,8 +137,8 @@ const Home: React.FC = () => {
             </div>
             <span className="text-xs mt-2 text-center">EPI</span>
           </button>
-          
-          <button 
+
+          <button
             className="flex flex-col items-center justify-center p-2"
             onClick={() => navigate('/dds')}
           >
@@ -147,8 +147,8 @@ const Home: React.FC = () => {
             </div>
             <span className="text-xs mt-2 text-center">DDS</span>
           </button>
-          
-          <button 
+
+          <button
             className="flex flex-col items-center justify-center p-2"
             onClick={() => navigate('/deliveries')}
           >
@@ -157,8 +157,8 @@ const Home: React.FC = () => {
             </div>
             <span className="text-xs mt-2 text-center">Entregas</span>
           </button>
-          
-          <button 
+
+          <button
             className="flex flex-col items-center justify-center p-2"
             onClick={() => navigate('/consumption')}
           >
@@ -167,8 +167,8 @@ const Home: React.FC = () => {
             </div>
             <span className="text-xs mt-2 text-center">Consumo</span>
           </button>
-          
-          <button 
+
+          <button
             className="flex flex-col items-center justify-center p-2"
             onClick={() => navigate('/evaluation')}
           >
@@ -177,20 +177,30 @@ const Home: React.FC = () => {
             </div>
             <span className="text-xs mt-2 text-center">Avaliação</span>
           </button>
+
+          <button
+            className="flex flex-col items-center justify-center p-2"
+            onClick={() => navigate('/users')}
+          >
+            <div className="bg-primary p-3 rounded w-14 h-14 flex items-center justify-center">
+              <Users className="text-white" size={24} />
+            </div>
+            <span className="text-xs mt-2 text-center">Usuários</span>
+          </button>
         </div>
       </div>
-      
+
       <div className="p-4">
         <div className="flex justify-between items-center mb-4">
           <h3 className="font-bold text-lg">Atualizações e Notificações</h3>
-          <button 
+          <button
             className="text-primary text-sm"
             onClick={() => navigate('/notifications')}
           >
             Veja mais
           </button>
         </div>
-        
+
         {pendingNotifications.length > 0 ? (
           pendingNotifications.map(notification => (
             <NotificationCard key={notification.id} notification={notification} />
@@ -202,7 +212,7 @@ const Home: React.FC = () => {
           </div>
         )}
       </div>
-      
+
       <BottomNavigation />
     </div>
   );

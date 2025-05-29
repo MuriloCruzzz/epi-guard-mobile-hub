@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { AuthState, User, UserRole } from "@/types";
 import { jwtDecode } from "jwt-decode";
@@ -17,6 +16,16 @@ interface DecodedToken {
   user: User;
 }
 
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  profileImage?: string;
+  role: string;
+  department: string;
+  location: string;
+}
+
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [authState, setAuthState] = useState<AuthState>({
     token: null,
@@ -33,33 +42,33 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       try {
         const decodedToken = jwtDecode<DecodedToken>(token);
         const isExpired = new Date(decodedToken.exp * 1000) < new Date();
-        
+
         if (isExpired) {
           localStorage.removeItem("epi_token");
-          setAuthState({ 
-            token: null, 
-            user: null, 
-            isAuthenticated: false, 
-            loading: false, 
-            error: null 
+          setAuthState({
+            token: null,
+            user: null,
+            isAuthenticated: false,
+            loading: false,
+            error: null
           });
         } else {
-          setAuthState({ 
-            token, 
-            user: decodedToken.user, 
-            isAuthenticated: true, 
-            loading: false, 
-            error: null 
+          setAuthState({
+            token,
+            user: decodedToken.user,
+            isAuthenticated: true,
+            loading: false,
+            error: null
           });
         }
       } catch (error) {
         localStorage.removeItem("epi_token");
-        setAuthState({ 
-          token: null, 
-          user: null, 
-          isAuthenticated: false, 
-          loading: false, 
-          error: "Invalid token" 
+        setAuthState({
+          token: null,
+          user: null,
+          isAuthenticated: false,
+          loading: false,
+          error: "Invalid token"
         });
       }
     } else {
@@ -70,7 +79,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const isTokenExpired = (): boolean => {
     const { token } = authState;
     if (!token) return true;
-    
+
     try {
       const decodedToken = jwtDecode<DecodedToken>(token);
       return new Date(decodedToken.exp * 1000) < new Date();
@@ -81,7 +90,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const login = async (email: string, password: string): Promise<void> => {
     setAuthState({ ...authState, loading: true });
-    
+
     try {
       // In a real app, this would be an API call
       // For now we'll mock a JWT token response
@@ -94,20 +103,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         position: "Técnico em Manutenção",
         phone: "+55 12 99799 9578"
       };
-      
+
       // Create a mock JWT that expires in 1 hour
       const expTime = Math.floor(Date.now() / 1000) + 60 * 60;
       const tokenPayload = {
         user: mockUser,
         exp: expTime
       };
-      
+
       // Base64 encode the payload to simulate a JWT
       const tokenString = btoa(JSON.stringify(tokenPayload));
       const mockToken = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.${tokenString}.mockSignature`;
-      
+
       localStorage.setItem("epi_token", mockToken);
-      
+
       setAuthState({
         token: mockToken,
         user: mockUser,
@@ -125,10 +134,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       });
     }
   };
-  
+
   const loginWithBiometric = async (): Promise<void> => {
     setAuthState({ ...authState, loading: true });
-    
+
     try {
       // In a real app, this would trigger biometric authentication
       // For now we'll just simulate a successful biometric auth
@@ -142,20 +151,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           position: "Técnico em Manutenção",
           phone: "+55 12 99799 9578"
         };
-        
+
         // Create a mock JWT that expires in 1 hour
         const expTime = Math.floor(Date.now() / 1000) + 60 * 60;
         const tokenPayload = {
           user: mockUser,
           exp: expTime
         };
-        
+
         // Base64 encode the payload to simulate a JWT
         const tokenString = btoa(JSON.stringify(tokenPayload));
         const mockToken = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.${tokenString}.mockSignature`;
-        
+
         localStorage.setItem("epi_token", mockToken);
-        
+
         setAuthState({
           token: mockToken,
           user: mockUser,

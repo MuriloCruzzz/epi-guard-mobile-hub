@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -10,6 +9,7 @@ import { DataProvider } from "@/contexts/DataContext";
 // Pages
 import Splash from "./pages/Splash";
 import Login from "./pages/Login";
+import RecoverPassword from "./pages/RecoverPassword";
 import Home from "./pages/Home";
 import MyEPIs from "./pages/MyEPIs";
 import EPIDetail from "./pages/EPIDetail";
@@ -24,6 +24,7 @@ import DDSList from "./pages/DDSList";
 import DDSDetail from "./pages/DDSDetail";
 import Consumption from "./pages/Consumption";
 import NotFound from "./pages/NotFound";
+import Users from "./pages/Users";
 
 const queryClient = new QueryClient();
 
@@ -37,7 +38,9 @@ const App = () => (
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Splash />} />
+              <Route path="/splash" element={<Splash />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/recover-password" element={<RecoverPassword />} />
               <Route path="/home" element={<Home />} />
               <Route path="/my-epis" element={<MyEPIs />} />
               <Route path="/epi/:id" element={<EPIDetail />} />
@@ -51,6 +54,7 @@ const App = () => (
               <Route path="/dds" element={<DDSList />} />
               <Route path="/dds/:id" element={<DDSDetail />} />
               <Route path="/consumption" element={<Consumption />} />
+              <Route path="/users" element={<Users />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

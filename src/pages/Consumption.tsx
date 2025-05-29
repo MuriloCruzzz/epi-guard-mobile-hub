@@ -1,13 +1,13 @@
-
 import React from 'react';
 import Header from '@/components/Header';
 import BottomNavigation from '@/components/BottomNavigation';
 import { ConsumptionItem } from '@/types';
 import { ChevronRight } from 'lucide-react';
+import PageHeader from '@/components/PageHeader';
 
 const Consumption: React.FC = () => {
   const [activeTab, setActiveTab] = React.useState('consumo');
-  
+
   // Mock consumption data
   const consumptionData: ConsumptionItem[] = [
     { name: 'Capacete', requestedQuantity: 2, evaluationCount: 2 },
@@ -19,13 +19,13 @@ const Consumption: React.FC = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100 pb-16">
-      <Header title="CONSUMO" showBack />
-      
+      <PageHeader title="CONSUMO" />
+
       <div className="bg-primary p-4 text-white">
         <h2 className="text-xl font-bold">Ricardo Paixão</h2>
         <p className="text-sm">CONSERVAÇÃO DE VEÍCULOS TAUBATÉ</p>
         <p className="text-sm">ID Sistema Sênior: 123456789</p>
-        
+
         <div className="flex mt-4 border-b border-white/20">
           <button
             className={`flex-1 py-2 ${activeTab === 'entregas' ? 'border-b-2 border-white font-bold' : ''}`}
@@ -61,10 +61,9 @@ const Consumption: React.FC = () => {
               </div>
               <div>
                 <p className="text-sm text-gray-600">Avaliações de uso</p>
-                <p className={`text-lg font-medium ${
-                  item.evaluationCount < item.requestedQuantity ? 'text-destructive' : 
-                  item.evaluationCount > item.requestedQuantity ? 'text-destructive' : 'text-primary'
-                }`}>
+                <p className={`text-lg font-medium ${item.evaluationCount < item.requestedQuantity ? 'text-destructive' :
+                    item.evaluationCount > item.requestedQuantity ? 'text-destructive' : 'text-primary'
+                  }`}>
                   {String(item.evaluationCount).padStart(2, '0')}
                 </p>
               </div>
@@ -72,7 +71,7 @@ const Consumption: React.FC = () => {
           </div>
         ))}
       </div>
-      
+
       <BottomNavigation />
     </div>
   );
