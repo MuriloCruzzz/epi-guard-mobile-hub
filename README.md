@@ -1,73 +1,146 @@
-# Welcome to your Lovable project
+# EPI Guard Mobile Hub 🛡️
 
-## Project info
+Sistema móvel para gestão e controle de Equipamentos de Proteção Individual (EPIs) desenvolvido com React e TypeScript.
 
-**URL**: https://lovable.dev/projects/9e6438a3-ac19-46dd-a29b-516c0b8e2f8b
+## 📱 Sobre o Projeto
 
-## How can I edit this code?
+O EPI Guard Mobile Hub é uma aplicação web responsiva que permite aos usuários:
+- **Solicitar EPIs** de forma simplificada
+- **Avaliar equipamentos** recebidos
+- **Gerenciar perfil** de usuário
+- **Visualizar dashboard** com estatísticas
+- **Receber notificações** sobre status de solicitações
+- **Acompanhar histórico** de itens
 
-There are several ways of editing your application.
+## 🚀 Tecnologias Utilizadas
 
-**Use Lovable**
+- **Frontend**: React 18 + TypeScript
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS
+- **UI Components**: shadcn/ui
+- **State Management**: React Context API
+- **Responsive Design**: Mobile-first approach
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/9e6438a3-ac19-46dd-a29b-516c0b8e2f8b) and start prompting.
+## 📋 Pré-requisitos
 
-Changes made via Lovable will be committed automatically to this repo.
+- Node.js 18+ 
+- npm ou yarn
+- Git
 
-**Use your preferred IDE**
+## 🛠️ Instalação e Configuração
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+### 1. Clone o repositório
+```bash
+git clone https://github.com/MuriloCruzzz/epi-guard-mobile-hub.git
+cd epi-guard-mobile-hub
 ```
 
-**Edit a file directly in GitHub**
+### 2. Instale as dependências
+```bash
+npm install
+# ou
+yarn install
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### 3. Execute o projeto
+```bash
+npm run dev
+# ou
+yarn dev
+```
 
-**Use GitHub Codespaces**
+### 4. Acesse a aplicação
+Abra [http://localhost:5173](http://localhost:5173) no seu navegador
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 📁 Estrutura do Projeto
 
-## What technologies are used for this project?
+```
+src/
+├── components/          # Componentes reutilizáveis
+│   ├── ui/             # Componentes base (shadcn/ui)
+│   ├── Header.tsx      # Cabeçalho da aplicação
+│   ├── SideMenu.tsx    # Menu lateral
+│   └── ...
+├── pages/              # Páginas da aplicação
+│   ├── Dashboard.tsx   # Página principal
+│   ├── Login.tsx       # Autenticação
+│   └── ...
+├── contexts/           # Contextos React
+│   ├── AuthContext.tsx # Contexto de autenticação
+│   └── DataContext.tsx # Contexto de dados
+├── hooks/              # Hooks customizados
+├── types/              # Definições de tipos TypeScript
+└── lib/                # Utilitários e configurações
+```
 
-This project is built with:
+## 🔧 Scripts Disponíveis
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- `npm run dev` - Inicia o servidor de desenvolvimento
+- `npm run build` - Gera build de produção
+- `npm run preview` - Visualiza o build de produção
+- `npm run lint` - Executa o linter
 
-## How can I deploy this project?
+## 📱 Funcionalidades Principais
 
-Simply open [Lovable](https://lovable.dev/projects/9e6438a3-ac19-46dd-a29b-516c0b8e2f8b) and click on Share -> Publish.
+### 🔐 Autenticação
+- Login com credenciais
+- Recuperação de senha
+- Perfil de usuário
 
-## Can I connect a custom domain to my Lovable project?
+### 📊 Dashboard
+- Visão geral de EPIs
+- Estatísticas de consumo
+- Status de solicitações
 
-Yes, you can!
+### 📝 Solicitações
+- Formulário de solicitação de EPIs
+- Upload de imagens
+- Acompanhamento de status
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+### ⭐ Avaliações
+- Sistema de avaliação por estrelas
+- Comentários sobre equipamentos
+- Histórico de avaliações
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+### 🔔 Notificações
+- Sistema de notificações em tempo real
+- Alertas sobre status de solicitações
+
+## 🎨 Design System
+
+O projeto utiliza o shadcn/ui como base de componentes, garantindo:
+- Consistência visual
+- Acessibilidade
+- Responsividade
+- Tema escuro/claro
+
+## 📱 Responsividade
+
+Desenvolvido com abordagem mobile-first, garantindo excelente experiência em:
+- Smartphones
+- Tablets
+- Desktops
+
+## 🤝 Contribuição
+
+1. Faça um fork do projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
+
+## 📄 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+## 👨‍💻 Desenvolvedor
+
+**Murilo Cruz** - [GitHub](https://github.com/MuriloCruzzz)
+
+## 📞 Suporte
+
+Para dúvidas ou suporte, entre em contato através do GitHub ou abra uma issue no repositório.
+
+---
+
+⭐ Se este projeto te ajudou, considere dar uma estrela no repositório!
