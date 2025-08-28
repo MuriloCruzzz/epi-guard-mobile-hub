@@ -5,6 +5,7 @@ import { Search } from 'lucide-react';
 import Header from '@/components/Header';
 import BottomNavigation from '@/components/BottomNavigation';
 import PageHeader from '@/components/PageHeader';
+import { getEpiImageUrl } from '@/lib/utils';
 
 const PendingRequests: React.FC = () => {
   const navigate = useNavigate();
@@ -55,9 +56,11 @@ const PendingRequests: React.FC = () => {
 
                   <div className="flex justify-between items-center mt-2">
                     <div className="flex items-center">
-                      {epi?.imageUrl && (
-                        <img src={epi.imageUrl} alt={epi.name} className="w-16 h-16 mr-3 object-contain" />
-                      )}
+                      <img
+                        src={epi ? getEpiImageUrl(epi.name, epi.type, epi.imageUrl) : '/lovable-uploads/placeholder.svg'}
+                        alt={epi?.name || 'EPI'}
+                        className="w-16 h-16 mr-3 object-contain"
+                      />
                       <div>
                         <p className="text-sm">{epi?.description?.substring(0, 100)}...</p>
                         <p className="text-xs text-gray-500 mt-1">{request.requestDate}</p>

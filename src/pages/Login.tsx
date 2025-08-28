@@ -108,7 +108,7 @@ const Login: React.FC = () => {
         </div>
       </div>
       <div className="w-full text-center py-4">
-        <p className="text-white text-sm">Desenvolvido por JJM © 2025</p>
+        <p className="text-white text-sm">Desenvolvido por FOX INNOVATION © 2025</p>
       </div>
     </div>
   );

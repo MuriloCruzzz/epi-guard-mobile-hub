@@ -12,6 +12,7 @@ interface User {
     phone: string;
     cpf: string;
     userGroup: string;
+    isDeleted?: boolean;
 }
 
 const Users: React.FC = () => {
@@ -20,6 +21,7 @@ const Users: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedGroup, setSelectedGroup] = useState<string>('all');
     const [showFilters, setShowFilters] = useState(false);
+    const [showDeleted, setShowDeleted] = useState(false);
 
     // Dados mockados para exemplo
     const users: User[] = [
@@ -37,7 +39,8 @@ const Users: React.FC = () => {
             birthDate: '20/08/1985',
             phone: '(11) 91234-5678',
             cpf: '987.654.321-00',
-            userGroup: 'Administrativo'
+            userGroup: 'Administrativo',
+            isDeleted: true
         },
         {
             id: 3,
@@ -61,7 +64,8 @@ const Users: React.FC = () => {
             birthDate: '05/07/1995',
             phone: '(11) 91234-9876',
             cpf: '321.654.987-00',
-            userGroup: 'Gerente'
+            userGroup: 'Gerente',
+            isDeleted: true
         },
         {
             id: 6,
@@ -91,13 +95,15 @@ const Users: React.FC = () => {
 
     const userGroups = ['Operacional', 'Administrativo', 'Supervisor', 'Gerente'];
 
-    const filteredUsers = users.filter(user => {
-        const matchesSearch = user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            user.cpf.includes(searchTerm) ||
-            user.phone.includes(searchTerm);
-        const matchesGroup = selectedGroup === 'all' || user.userGroup === selectedGroup;
-        return matchesSearch && matchesGroup;
-    });
+    const filteredUsers = users
+        .filter(u => (showDeleted ? u.isDeleted : !u.isDeleted))
+        .filter(user => {
+            const matchesSearch = user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                user.cpf.includes(searchTerm) ||
+                user.phone.includes(searchTerm);
+            const matchesGroup = selectedGroup === 'all' || user.userGroup === selectedGroup;
+            return matchesSearch && matchesGroup;
+        });
 
     return (
         <div className="flex flex-col min-h-screen bg-gray-100 pb-16">
@@ -195,16 +201,36 @@ const Users: React.FC = () => {
                     </button>
                 </div>
 
+                {/* Checkbox Excluído */}
+                <div className="flex justify-end -mt-1">
+                    <label className="inline-flex items-center gap-2 text-sm text-gray-700 select-none">
+                        <input
+                            type="checkbox"
+                            checked={showDeleted}
+                            onChange={(e) => setShowDeleted(e.target.checked)}
+                            className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                        />
+                        Excluído
+                    </label>
+                </div>
+
                 {/* Lista de usuários */}
-                <div className="bg-white rounded-lg shadow divide-y max-h-[calc(100vh-280px)] overflow-y-auto">
+                <div className="bg-white rounded-lg shadow divide-y max-h-[calc(100vh-320px)] overflow-y-auto">
                     {filteredUsers.map(user => (
                         <div key={user.id} className="p-2">
                             <div className="flex justify-between items-center">
                                 <div className="flex-1 min-w-0">
                                     <div className="flex items-center gap-2">
+                                        <div className="w-8 h-8 rounded-full overflow-hidden bg-gray-200 flex-shrink-0">
+                                            <img
+                                                src={'/lovable-uploads/photo_user.png'}
+                                                alt={user.name}
+                                                className="w-full h-full object-cover"
+                                            />
+                                        </div>
                                         <h3 className="font-semibold truncate text-sm">{user.name}</h3>
-                                        <span className="px-1.5 py-0.5 bg-primary/10 text-primary text-xs rounded-full whitespace-nowrap">
-                                            {user.userGroup}
+                                        <span className={`px-1.5 py-0.5 text-xs rounded-full whitespace-nowrap ${showDeleted ? 'bg-destructive/10 text-destructive' : 'bg-primary/10 text-primary'}`}>
+                                            {user.userGroup}{showDeleted ? ' • Excluído' : ''}
                                         </span>
                                     </div>
                                     <div className="grid grid-cols-2 gap-x-3 gap-y-0.5 mt-0.5">
@@ -231,7 +257,7 @@ const Users: React.FC = () => {
 
                     {filteredUsers.length === 0 && (
                         <div className="p-4 text-center text-gray-500">
-                            Nenhum usuário encontrado
+                            {showDeleted ? 'Nenhum usuário excluído encontrado' : 'Nenhum usuário encontrado'}
                         </div>
                     )}
                 </div>

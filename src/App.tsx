@@ -11,6 +11,7 @@ import Splash from "./pages/Splash";
 import Login from "./pages/Login";
 import RecoverPassword from "./pages/RecoverPassword";
 import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
 import MyEPIs from "./pages/MyEPIs";
 import EPIDetail from "./pages/EPIDetail";
 import Notifications from "./pages/Notifications";
@@ -25,6 +26,9 @@ import DDSDetail from "./pages/DDSDetail";
 import Consumption from "./pages/Consumption";
 import NotFound from "./pages/NotFound";
 import Users from "./pages/Users";
+import NewUser from "./pages/NewUser";
+import UserGroups from "./pages/UserGroups";
+import EditUser from "./pages/EditUser";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +46,7 @@ const App = () => (
               <Route path="/login" element={<Login />} />
               <Route path="/recover-password" element={<RecoverPassword />} />
               <Route path="/home" element={<Home />} />
+              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/my-epis" element={<MyEPIs />} />
               <Route path="/epi/:id" element={<EPIDetail />} />
               <Route path="/notifications" element={<Notifications />} />
@@ -55,6 +60,9 @@ const App = () => (
               <Route path="/dds/:id" element={<DDSDetail />} />
               <Route path="/consumption" element={<Consumption />} />
               <Route path="/users" element={<Users />} />
+              <Route path="/users/new" element={<NewUser />} />
+              <Route path="/users/edit/:id" element={<EditUser />} />
+              <Route path="/users/groups" element={<UserGroups />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

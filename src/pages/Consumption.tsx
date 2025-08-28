@@ -1,11 +1,13 @@
 import React from 'react';
-import Header from '@/components/Header';
 import BottomNavigation from '@/components/BottomNavigation';
 import { ConsumptionItem } from '@/types';
-import { ChevronRight } from 'lucide-react';
-import PageHeader from '@/components/PageHeader';
+import { ChevronRight, ArrowLeft, Bell, Menu } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@/contexts/AuthContext';
 
 const Consumption: React.FC = () => {
+  const navigate = useNavigate();
+  const { user } = useAuth();
   const [activeTab, setActiveTab] = React.useState('consumo');
 
   // Mock consumption data
@@ -19,14 +21,30 @@ const Consumption: React.FC = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100 pb-16">
-      <PageHeader title="CONSUMO" />
+      <div className="flex items-center justify-between bg-primary p-4 text-white w-full sticky top-0 z-10">
+        <button onClick={() => navigate('/home')} className="text-white">
+          <ArrowLeft size={28} />
+        </button>
 
-      <div className="bg-primary p-4 text-white">
-        <h2 className="text-xl font-bold">Ricardo Paixão</h2>
-        <p className="text-sm">CONSERVAÇÃO DE VEÍCULOS TAUBATÉ</p>
-        <p className="text-sm">ID Sistema Sênior: 123456789</p>
+        <div className="flex items-center gap-3 flex-1 px-3">
+          <h1 className="text-xl font-bold">Consumo</h1>
+        </div>
 
-        <div className="flex mt-4 border-b border-white/20">
+        <div className="bg-white/20 rounded-full p-1.5">
+          {user?.profileImage ? (
+            <img src={user.profileImage} alt={user.name} className="w-8 h-8 rounded-full object-cover" />
+          ) : (
+            <img
+              src="/lovable-uploads/photo_user.png"
+              alt={user?.name || 'Usuário'}
+              className="w-8 h-8 rounded-full object-cover"
+            />
+          )}
+        </div>
+      </div>
+
+      <div className="bg-primary text-white px-4 pb-2">
+        <div className="flex mt-2 border-b border-white/20">
           <button
             className={`flex-1 py-2 ${activeTab === 'entregas' ? 'border-b-2 border-white font-bold' : ''}`}
             onClick={() => setActiveTab('entregas')}
@@ -41,7 +59,7 @@ const Consumption: React.FC = () => {
           </button>
           <button
             className={`flex-1 py-2 ${activeTab === 'solicitar' ? 'border-b-2 border-white font-bold' : ''}`}
-            onClick={() => setActiveTab('solicitar')}
+            onClick={() => navigate('/request-epi')}
           >
             Solicitar EPI
           </button>
@@ -62,7 +80,7 @@ const Consumption: React.FC = () => {
               <div>
                 <p className="text-sm text-gray-600">Avaliações de uso</p>
                 <p className={`text-lg font-medium ${item.evaluationCount < item.requestedQuantity ? 'text-destructive' :
-                    item.evaluationCount > item.requestedQuantity ? 'text-destructive' : 'text-primary'
+                  item.evaluationCount > item.requestedQuantity ? 'text-destructive' : 'text-primary'
                   }`}>
                   {String(item.evaluationCount).padStart(2, '0')}
                 </p>

@@ -1,7 +1,7 @@
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { EPI, EPIStatus } from '@/types';
+import { getEpiImageUrl } from '@/lib/utils';
 
 interface EPICardProps {
   epi: EPI;
@@ -11,7 +11,7 @@ interface EPICardProps {
 
 const EPICard: React.FC<EPICardProps> = ({ epi, showActions = false, onRequest }) => {
   const navigate = useNavigate();
-  
+
   const getStatusColor = (status: EPIStatus): string => {
     switch (status) {
       case EPIStatus.AVAILABLE:
@@ -42,9 +42,11 @@ const EPICard: React.FC<EPICardProps> = ({ epi, showActions = false, onRequest }
   return (
     <div className="bg-white p-4 rounded-lg shadow-sm mb-4" onClick={handleClick}>
       <div className="flex items-center">
-        {epi.imageUrl && (
-          <img src={epi.imageUrl} alt={epi.name} className="w-14 h-14 object-contain mr-4" />
-        )}
+        <img
+          src={getEpiImageUrl(epi.name, epi.type, epi.imageUrl)}
+          alt={epi.name}
+          className="w-14 h-14 object-contain mr-4"
+        />
         <div className="flex-1">
           <div className="flex justify-between items-start">
             <h3 className="text-primary text-lg font-bold">{epi.name} | {epi.code}</h3>
@@ -64,10 +66,10 @@ const EPICard: React.FC<EPICardProps> = ({ epi, showActions = false, onRequest }
           <p className="text-sm text-gray-500 mt-2 line-clamp-2">{epi.description}</p>
         </div>
       </div>
-      
+
       {showActions && epi.status === EPIStatus.AVAILABLE && (
         <div className="mt-4">
-          <button 
+          <button
             className="bg-primary text-white py-2 px-4 rounded w-full"
             onClick={() => onRequest && onRequest(epi.id)}
           >

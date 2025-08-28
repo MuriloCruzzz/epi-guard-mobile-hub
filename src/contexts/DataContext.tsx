@@ -60,7 +60,7 @@ const mockEpis: EPI[] = [
     acquisitionDate: "24/01/2024",
     status: EPIStatus.VALIDATED,
     type: "Proteção para Mãos",
-    imageUrl: "/lovable-uploads/7ca71885-fa2e-4eac-9bd9-3f2f36e61aa0.png"
+    imageUrl: "/lovable-uploads/bota.png"
   }
 ];
 
@@ -197,13 +197,13 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const markDdsAsConfirmed = (ddsId: string): void => {
-    const updatedDds = ddsList.map(dds => 
+    const updatedDds = ddsList.map(dds =>
       dds.id === ddsId ? { ...dds, status: "CONFIRMADO" as any } : dds
     );
     setDdsList(updatedDds);
 
     // Update notification if exists
-    const updatedNotifications = notifications.map(notification => 
+    const updatedNotifications = notifications.map(notification =>
       notification.relatedId === ddsId && notification.relatedType === "DDS"
         ? { ...notification, read: true }
         : notification
@@ -212,7 +212,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const markNotificationAsRead = (notificationId: string): void => {
-    const updatedNotifications = notifications.map(notification => 
+    const updatedNotifications = notifications.map(notification =>
       notification.id === notificationId ? { ...notification, read: true } : notification
     );
     setNotifications(updatedNotifications);
@@ -221,15 +221,15 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const evaluateEpi = (epiId: string, rating: number, comment: string): void => {
     // In a real app, this would send the evaluation to an API
     console.log(`EPI ${epiId} evaluated with rating ${rating} and comment: ${comment}`);
-    
+
     // Update EPI status
-    const updatedEpis = epis.map(epi => 
+    const updatedEpis = epis.map(epi =>
       epi.id === epiId ? { ...epi, status: EPIStatus.VALIDATED } : epi
     );
     setEpis(updatedEpis);
 
     // Update notification if exists
-    const updatedNotifications = notifications.map(notification => 
+    const updatedNotifications = notifications.map(notification =>
       notification.relatedId === epiId && notification.type === "EPI_EVALUATION"
         ? { ...notification, read: true }
         : notification
@@ -239,7 +239,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const returnEpi = (epiId: string): void => {
     // Mark the EPI as returned
-    const updatedEpis = epis.map(epi => 
+    const updatedEpis = epis.map(epi =>
       epi.id === epiId ? { ...epi, status: EPIStatus.RETURN } : epi
     );
     setEpis(updatedEpis);
@@ -248,7 +248,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const requestNewEpi = (epiId: string): void => {
     // Find the EPI
     const epi = epis.find(item => item.id === epiId);
-    
+
     if (epi) {
       const newRequest: EPIRequest = {
         id: `${requests.length + 1}`,
@@ -261,7 +261,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         status: "PENDENTE" as any,
         reason: "Nova solicitação"
       };
-      
+
       setRequests([...requests, newRequest]);
     }
   };
