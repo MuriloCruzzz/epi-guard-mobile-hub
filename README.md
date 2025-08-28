@@ -50,7 +50,7 @@ yarn dev
 ```
 
 ### 4. Acesse a aplicação
-Abra [http://localhost:5173](http://localhost:5173) no seu navegador
+Abra [http://localhost:8080](http://localhost:8080) no seu navegador
 
 ## 📁 Estrutura do Projeto
 
